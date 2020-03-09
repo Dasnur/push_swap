@@ -6,11 +6,54 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:31:27 by atote             #+#    #+#             */
-/*   Updated: 2020/03/04 17:25:39 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/09 14:28:28 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	free_all(t_head *stacks)
+{
+	t_lst	*tmp;
+
+	if (!stacks)
+		return ;
+	while (stacks->a)
+	{
+		tmp = stacks->a->next;
+		free(stacks->a);
+		stacks->a = tmp;
+	}
+	while (stacks->b)
+	{
+		tmp = stacks->b->next;
+		free(stacks->b);
+		stacks->b = tmp;
+	}
+}
+
+int		hmm(t_head *stacks)
+{
+	t_lst	*tmp;
+
+	tmp = stacks->a;
+	if (!stacks)
+		return (0);
+	if (stacks->b == NULL && stacks->a != NULL)
+	{
+		while (tmp->next)
+		{
+			if (tmp->value < tmp->next->value)
+				tmp = tmp->next;
+			else
+				return (0);
+		}
+		return (1);
+	}
+	else
+		return (0);
+	return (1);
+}
 
 int		exc(void)
 {

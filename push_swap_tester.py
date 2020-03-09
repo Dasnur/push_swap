@@ -8,13 +8,12 @@ def make_bash(a,b,n):
 	with open('tester.sh','w') as f:
 		f.writelines('#!/bin/sh')
 		f.writelines('\n')
-		f.writelines('gcc -o push_swap sources/push_swap.c sources/push_al0.c sources/push_com.c sources/l_add_print.c sources/push_print.c -Llibft/ -lft -Lft_printf -lftprintf')
 		f.writelines('\n')
 		f.writelines(f'ARG="{samp}"')
 		f.writelines('\n')
 		f.writelines('./push_swap $ARG | wc -l')
 		f.writelines('\n')
-		f.writelines('./push_swap $ARG | ./checker $ARG')
+		f.writelines('./push_swap $ARG | ./checker -v $ARG')
 		f.writelines('\n')
 
 

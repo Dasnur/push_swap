@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atote <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:58:44 by atote             #+#    #+#             */
-/*   Updated: 2019/09/16 21:22:16 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/07 16:17:05 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,13 @@
 
 char	*ft_strnew(size_t size)
 {
-	char	*res;
 	size_t	i;
-	int		ch;
+	char	*string;
 
-	ch = size;
-	if (ch < 0)
+	if (!(string = ft_memalloc(size + 1)))
 		return (NULL);
 	i = 0;
-	res = (char *)malloc(sizeof(char) * (size + 1));
-	if (!res)
-		return (NULL);
-	while (i <= size)
-	{
-		res[i] = '\0';
-		i++;
-	}
-	return (res);
+	while (i < size)
+		string[i++] = '\0';
+	return (string);
 }

@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:17:40 by atote             #+#    #+#             */
-/*   Updated: 2020/03/04 18:18:35 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/07 19:12:31 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_lst	*l_swap(t_lst **h)
 {
 	t_lst	*tmp;
 
-	if ((*h)->next == NULL || !(*h))
-		return (NULL);
+	if (!(*h) || (*h)->next == NULL)
+		return (*h);
 	tmp = (*h)->next;
 	(*h)->next = (*h)->next->next;
 	tmp->next = (*h);
@@ -30,7 +30,7 @@ int		l_pushb(t_head *stacks)
 	t_lst	*tmp;
 
 	if (!stacks->a)
-		return (1);
+		return (0);
 	if (!stacks->b)
 	{
 		tmp = stacks->a->next;
@@ -52,8 +52,15 @@ int		l_pusha(t_head *stacks)
 	t_lst	*tmp1;
 
 	if (!stacks->b)
-		return (1);
-	stacks->b->is_color = 0;
+		return (0);
+	if (!stacks->a)
+	{
+		tmp = stacks->b->next;
+		stacks->b->next = NULL;
+		stacks->a = stacks->b;
+		stacks->b = tmp;
+		return (0);
+	}
 	tmp = (stacks->b)->next;
 	tmp1 = stacks->a;
 	(stacks->b)->next = tmp1;
@@ -67,6 +74,8 @@ t_lst	*l_rotate(t_lst *a)
 	t_lst *tmp;
 	t_lst *last;
 
+	if (!a || !(a->next))
+		return (a);
 	last = a;
 	while (last->next)
 		last = last->next;
@@ -81,6 +90,8 @@ t_lst	*l_reverse_rotate(t_lst *a)
 	t_lst	*tmp;
 	t_lst	*prelast;
 
+	if (!a || !(a->next))
+		return (a);
 	prelast = a;
 	while (prelast->next->next)
 		prelast = prelast->next;

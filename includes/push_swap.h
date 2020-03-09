@@ -1,6 +1,7 @@
 #ifndef PUSH_SWAP_H
 #define PUSH_SWAP_H
 
+# include <stdlib.h>
 # include "../libft/libft.h"
 
 typedef struct  	s_lst
@@ -14,6 +15,8 @@ typedef struct		s_head
 {
 	t_lst			*a;
 	t_lst			*b;
+    int             fv;
+    char            *line;
 }					t_head;
 
 t_lst		*l_add_first(t_lst *head, int value);
@@ -24,7 +27,7 @@ int		    l_pushb(t_head *stacks);
 int		    l_pusha(t_head *stacks);
 t_lst		*l_swap(t_lst **h);
 int			hmm(t_head *stacks);
-void	    al_min(t_head stacks, int n);
+void	    al_min(t_head *stacks, int n);
 int		    ft_printf(char *line, ...);
 void	    print_all(t_head *stacks, int n);
 int		    check_argv(char *res);
@@ -33,4 +36,7 @@ int		    valid_arg(t_head *stacks, char **argv, int argc, int fv);
 int		    exc(void);
 int		    find_maxi(t_lst a);
 int		    find_mini(t_lst a);
+int		    l_count_elem(t_lst *a);
+void	    free_all(t_head *stacks);
+void        free_line(char **line);
 #endif

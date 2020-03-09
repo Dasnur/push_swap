@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:23:16 by atote             #+#    #+#             */
-/*   Updated: 2020/03/04 17:53:52 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/09 14:32:13 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,26 +106,26 @@ void	al_min_help2(t_head *stacks)
 	ft_putstr("pb\n");
 }
 
-void	al_min(t_head stacks, int n)
+void	al_min(t_head *stacks, int n)
 {
 	int		i;
 	int		countshag;
 
 	i = 0;
 	countshag = 0;
-	while (countshag < 2 && n > 50)
+	while (countshag < 2 && n > 20)
 	{
 		while (i < (n / 2 + 1))
 		{
-			l_pushb(&stacks);
+			l_pushb(stacks);
 			ft_putstr("pb\n");
 			i++;
 		}
-		al_min_help1(&stacks, &countshag);
+		al_min_help1(stacks, &countshag);
 		i = 0;
 	}
-	while (l_count_elem(stacks.a) && hmm(&stacks) != 1)
-		al_min_help2(&stacks);
-	while (l_count_elem(stacks.b))
-		print_com("pa", &stacks);
+	while (l_count_elem(stacks->a) && hmm(stacks) != 1)
+		al_min_help2(stacks);
+	while (l_count_elem(stacks->b))
+		print_com("pa", stacks);
 }

@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   push_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/11 18:36:06 by atote             #+#    #+#             */
-/*   Updated: 2020/03/07 16:17:48 by atote            ###   ########.fr       */
+/*   Created: 2020/03/07 19:17:30 by atote             #+#    #+#             */
+/*   Updated: 2020/03/09 14:26:49 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-char	*ft_strdup(const char *s)
+void	free_line(char **line)
 {
-	char	*res;
-	int		i;
-
-	i = 0;
-	res = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!res)
-		return (NULL);
-	while (s[i] != '\0')
+	if (*line)
 	{
-		res[i] = s[i];
-		i++;
+		free(*line);
+		*line = NULL;
 	}
-	res[i] = '\0';
-	return (res);
 }

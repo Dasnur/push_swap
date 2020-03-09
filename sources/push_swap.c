@@ -6,32 +6,11 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:05:53 by atote             #+#    #+#             */
-/*   Updated: 2020/03/04 18:16:59 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/09 14:49:04 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int		hmm(t_head *stacks)
-{
-	t_lst	*tmp;
-
-	tmp = stacks->a;
-	if (stacks->b == NULL)
-	{
-		while (tmp->next)
-		{
-			if (tmp->value < tmp->next->value)
-				tmp = tmp->next;
-			else
-				return (0);
-		}
-		return (1);
-	}
-	else
-		return (0);
-	return (1);
-}
 
 int		find_mini(t_lst a)
 {
@@ -81,18 +60,6 @@ int		find_maxi(t_lst a)
 	return (place);
 }
 
-void	free_all(t_head *stacks)
-{
-	t_lst	*tmp;
-	
-	while (stacks->a)
-	{
-		tmp = stacks->a->next;
-		free(stacks->a);
-		stacks->a = tmp;	
-	}
-}
-
 int		main(int argc, char **argv)
 {
 	t_head	*stacks;
@@ -107,13 +74,12 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	n = argc - 1;
-	while (argc > 1)
+	if (!valid_arg(stacks, argv, argc, 1))
 	{
-		stacks->a = l_add_first(stacks->a, ft_atoi(argv[argc - 1]));
-		argc--;
+		free(stacks);
+		return (0);
 	}
-	l_pushb(stacks);
-	//al_min(*stacks, n);
+	al_min(stacks, n);
 	free_all(stacks);
 	free(stacks);
 	return (0);

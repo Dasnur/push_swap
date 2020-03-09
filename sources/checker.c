@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:05:17 by atote             #+#    #+#             */
-/*   Updated: 2020/03/04 17:15:03 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/09 14:38:52 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,39 +81,51 @@ int		val_line(char *line)
 	return (1);
 }
 
-void	descision(t_head *stacks)
+int		descision(t_head *stacks, char *line)
 {
-	if (hmm(stacks))
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
+	if (hmm(stacks) && stacks && stacks->a)
 		ft_putstr("OK\n");
-	else
+	if (!hmm(stacks) && stacks && stacks->a)
 		ft_putstr("KO\n");
+	free_all(stacks);
+	if (stacks)
+	{
+		free(stacks);
+		stacks = NULL;
+	}
+	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 	t_head	*stacks;
-	int		fv;
-	char	*line;
 
-	fv = 1;
 	stacks = (t_head*)malloc(sizeof(t_head));
+	stacks->fv = 1;
 	stacks->a = NULL;
 	stacks->b = NULL;
+	stacks->line = NULL;
 	if (argc == 1)
-		return (0);
+		return (descision(stacks, stacks->line));
 	if (ft_strcmp("-v", argv[1]) == 0)
-		fv = 2;
-	if (!valid_arg(stacks, argv, argc, fv))
-		return (0);
-	while (get_next_line(0, &line))
+		stacks->fv = 2;
+	if (!valid_arg(stacks, argv, argc, stacks->fv))
+		return (descision(stacks, stacks->line));
+	while (get_next_line(0, &stacks->line))
 	{
-		if (!sa_rb_com(stacks, line))
-			return (0);
-		else if (!rr_rrr_print(stacks, line, argc, fv))
+		if (!sa_rb_com(stacks, stacks->line))
+			return (descision(stacks, stacks->line));
+		else if (!rr_rrr_print(stacks, stacks->line, argc, stacks->fv))
 			break ;
-		if (!val_line(line))
-			return (0);
+		if (!val_line(stacks->line))
+			return (descision(stacks, stacks->line));
+		free_line(&stacks->line);
 	}
-	descision(stacks);
+	descision(stacks, stacks->line);
 	return (0);
 }

@@ -3,120 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atote <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:39:30 by atote             #+#    #+#             */
-/*   Updated: 2019/10/07 15:48:11 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/07 16:57:50 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	manage_rest(char **rest, size_t i)
+int		ft_new_line(char **s, char **line, int fd, int ret)
 {
-	char *old_rest;
-
-	old_rest = *rest;
-	if ((*rest)[i + 1])
-	{
-		*rest = ft_strsub(*rest, i + 1, ft_strlen(*rest));
-		ft_strdel(&old_rest);
-	}
-	else
-		ft_strdel(rest);
-}
-
-void	manage_line(int is_join, char **line, char **rest, size_t i)
-{
-	char *old_line;
-	char *eol;
-
-	if (is_join)
-	{
-		old_line = *line;
-		eol = ft_strsub(*rest, 0, i);
-		*line = ft_strjoin(*line, eol);
-		ft_strdel(&old_line);
-		ft_strdel(&eol);
-	}
-	else
-		*line = ft_strdup("");
-	manage_rest(rest, i);
-}
-
-int		check_rest(t_get *get, char **rest, char **line)
-{
-	size_t	i;
 	char	*tmp;
+	int		len;
 
-	i = -1;
-	get->ret = 1;
-	while (*rest && ++i < ft_strlen(*rest))
+	len = 0;
+	while (s[fd][len] != '\n' && s[fd][len] != '\0')
+		len++;
+	if (s[fd][len] == '\n')
 	{
-		if ((*rest)[i] == '\n')
-		{
-			if (i == 0 && *line && ft_strlen(*line) == 0)
-				manage_line(0, line, rest, i);
-			else
-				manage_line(1, line, rest, i);
-			return (1);
-		}
+		*line = ft_strsub(s[fd], 0, len);
+		tmp = ft_strdup(s[fd] + len + 1);
+		free(s[fd]);
+		s[fd] = tmp;
+		if (s[fd][0] == '\0')
+			ft_strdel(&s[fd]);
 	}
-	tmp = *line;
-	*line = ft_strjoin(*line, *rest);
-	if (*line == NULL)
-		*line = ft_strdup(*rest);
-	ft_strdel(&tmp);
-	ft_strdel(rest);
-	return (0);
+	else if (s[fd][len] == '\0')
+	{
+		if (ret == BUFF_SIZE)
+			return (get_next_line(fd, line));
+		*line = ft_strdup(s[fd]);
+		ft_strdel(&s[fd]);
+	}
+	return (1);
 }
 
-void	ft_read(t_get *get, char **rest, char **line)
+int		get_next_line(const int fd, char **line)
 {
-	char *buf;
+	static char	*s[255];
+	char		buf[BUFF_SIZE + 1];
+	char		*tmp;
+	int			ret;
 
-	buf = ft_strnew(BUFF_SIZE);
-	if (buf == NULL)
+	if (fd < 0 || line == NULL)
+		return (-1);
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		get->ret = -1;
-		return ;
-	}
-	while ((get->ret = read(get->fd, buf, BUFF_SIZE)))
-	{
-		buf[get->ret] = '\0';
-		*rest = ft_strjoin(*rest, buf);
-		if (*rest == NULL)
-			*rest = ft_strdup(buf);
-		if ((get->ret < 0) || check_rest(get, rest, line))
+		buf[ret] = '\0';
+		if (s[fd] == NULL)
+			s[fd] = ft_strnew(1);
+		tmp = ft_strjoin(s[fd], buf);
+		free(s[fd]);
+		s[fd] = tmp;
+		if (ft_strchr(buf, '\n'))
 			break ;
 	}
-	ft_strdel(&buf);
-}
-
-int		get_next_line(int const fd, char **line)
-{
-	t_get		*get;
-	static char	**rest = NULL;
-
-	if (fd < 0 || fd >= FD_MAX || BUFF_SIZE <= 0 || !line)
+	if (ret < 0)
 		return (-1);
-	if (!(get = (t_get *)malloc(sizeof(t_get))))
-		return (-1);
-	get->fd = fd;
-	if (rest == NULL)
-		if (!(rest = (char **)malloc(sizeof(char *) * FD_MAX)))
-			return (-1);
-	*line = ft_strnew(0);
-	if (rest[fd] == NULL || !check_rest(get, &rest[fd], line))
-		ft_read(get, &rest[fd], line);
-	if (get->ret == -1)
-		return (-1);
-	if (get->ret == 0 && rest[fd] == NULL && *line && ft_strlen(*line) == 0)
-	{
-		ft_strdel(line);
-		ft_memdel((void *)&get);
+	else if (ret == 0 && (s[fd] == NULL || s[fd][0] == '\0'))
 		return (0);
-	}
-	ft_memdel((void *)&get);
-	return (1);
+	return (ft_new_line(s, line, fd, ret));
 }
