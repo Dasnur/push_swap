@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:31:27 by atote             #+#    #+#             */
-/*   Updated: 2020/03/09 14:28:28 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/09 14:54:27 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		hmm(t_head *stacks)
 int		exc(void)
 {
 	ft_putstr("Error\n");
-	return (0);
+	exit(0);
 }
 
 void	help_print(t_lst **tmpb, int n, int lenf, int tmpv)

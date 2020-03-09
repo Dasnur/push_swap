@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 20:19:09 by atote             #+#    #+#             */
-/*   Updated: 2020/03/07 17:00:00 by atote            ###   ########.fr       */
+/*   Updated: 2020/03/09 15:02:05 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef	struct	s_get
+typedef	struct		s_get
 {
-	int			fd;
-	int			ret;
-}				t_get;
+	int				fd;
+	int				ret;
+}					t_get;
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *dest, int c, size_t n);
@@ -95,7 +95,8 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_strdel(char **as);
 void				ft_lstadd(t_list **alst, t_list *new);
 int					get_next_line(const int fd, char **line);
-int					mread_buf(char **tmp, char *buf, char **buffres, char **line);
+int					mread_buf(char **tmp, char *buf,
+char **buffres, char **line);
 int					mtmp_buf(char **tmp, char **line);
 int					last_string(char **tmp, char **buffres, char **line);
 char				*swap_bufs(char *s1, char *s2);
