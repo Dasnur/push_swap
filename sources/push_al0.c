@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:23:16 by atote             #+#    #+#             */
-/*   Updated: 2020/07/11 21:57:41 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/12 19:25:36 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,23 @@ void	al_min_help2(t_head *stacks)
 	ft_putstr("pb\n");
 }
 
-void	fill_stack_a(t_head *stacks) {
+void	fill_stack_a(t_head *stacks)
+{
 	int	i;
+	int	k;
 
-	i = 0;
-	while (i < stacks->ac - 1) {
-		stacks->a = l_add_first(stacks->a, ft_atoi(stacks->av[stacks->ac - 1])); 
-		i++;
+	k = 0;
+	i = stacks->ac;
+	while (k < stacks->ac - 1)
+	{
+		stacks->a = l_add_first(stacks->a, ft_atoi(stacks->av[i - 1])); 
+		i--;
+		k++;
 	}
 }
 
-void	fill_chunks(t_head *stacks, int chunks_cnt) {
+void	fill_chunks(t_head *stacks, int chunks_cnt)
+{
 	int	i;
 	int	k;
 	int	j;
@@ -142,11 +148,13 @@ void	fill_chunks(t_head *stacks, int chunks_cnt) {
 	}
 }
 
-int		belongs_to_chunk(int value, t_head *stacks, int current_chunk) {
+int		belongs_to_chunk(int value, t_head *stacks, int current_chunk)
+{
 	int	i;
 	
 	i = 0;
-	while (i < stacks->chunk_size) {
+	while (i < stacks->chunk_size)
+	{
 		if (value == stacks->chunks[current_chunk][i])
 			return 1;
 		i++;
@@ -167,38 +175,48 @@ int		get_stack_size(t_lst *l) {
 	return size;
 }
 
-int		get_place_holder_position(t_head *stacks, int current_chunk) {
-	int	place_holder_top;
-	int	place_holder_bottom;
-	int	i;
+void	define_place_holders(int *place_holder_top, int *place_holder_bottom, t_head *stacks, int current_chunk)
+{
 	t_lst *tmp;
+	int	i;
 
-	i = 0;
-	place_holder_bottom = -1;
-	place_holder_top = -1;
+	i = 0;	
 	tmp = stacks->a;
-	while (tmp) {
+	while (tmp)
+	{
 		if (belongs_to_chunk(tmp->value, stacks, current_chunk))
 		{
-			if (place_holder_top == -1)
-				place_holder_top = i;
-			place_holder_bottom = i;
-		}
+			if (*place_holder_top == -1)
+				*place_holder_top = i;
+			*place_holder_bottom = i;
+			}
 		i++;
 		tmp = tmp->next;
 	}
-	if (get_stack_size(stacks->a) - place_holder_bottom < place_holder_top)
-		return (get_stack_size(stacks->a) - place_holder_bottom);
-	return place_holder_top;
 }
 
-int		get_gap_index(t_head *stacks) {
+int		get_place_holder_position(t_head *stacks, int current_chunk)
+{
+	int	*place_holder_top;
+	int	*place_holder_bottom;
+
+	*place_holder_bottom = -1;
+	*place_holder_top = -1;
+	define_place_holders(place_holder_bottom, place_holder_top, stacks, current_chunk);
+	if (get_stack_size(stacks->a) - *place_holder_bottom < *place_holder_top)
+		return (*place_holder_bottom);
+	return *place_holder_top;
+}
+
+int		get_gap_index(t_head *stacks)
+{
 	int		gap_index;
 	t_lst	*tmp;
 	
 	tmp = stacks->b;
 	gap_index = 1;
-	while (tmp->next) {
+	while (tmp->next)
+	{
 		if (tmp->value > tmp->next->value)
 			return gap_index;
 		gap_index++;
@@ -270,15 +288,144 @@ void	order_b(t_head *stacks, int value)
 	tmp = stacks->b;
 	gap_index = get_gap_index(stacks);
 	position = get_target_position(stacks, gap_index, value);
-	
+	if (position > get_stack_size(stacks->b) / 2)
+	{
+		position = get_stack_size(stacks->b) - position;
+		while (position > 0)
+		{
+			print_com("rb", stacks);
+			position--;
+		}
+	}
+	else
+	{
+		while (position > 0)
+		{
+			print_com("rrb", stacks);
+			position--;
+		}
+	}	
 }
 
-void	place_holder_to_b(t_head *stacks, int current_chunk) {
-	int	place_holder_position;
+void	sort_b(t_head *stacks) 
+{
+	int		gap_index;
+	t_lst	*tmp;
+	int		i;
 
+	i = 0;
+	tmp = stacks->b;
+	gap_index = get_gap_index(stacks);
+	if (gap_index > get_stack_size(stacks->b) / 2)
+	{
+		gap_index = get_stack_size(stacks->b) - gap_index;
+		while (gap_index > 0)
+		{
+			print_com("rb", stacks);
+			gap_index--;
+		}
+	}
+	else
+	{
+		while (gap_index > 0)
+		{
+			print_com("rrb", stacks);
+			gap_index--;
+		}
+	}	
+}
+
+
+void	lift_up_place_holder(t_head *stacks, int place_holder_position)
+{
+	if (place_holder_position > get_stack_size(stacks->a) / 2)
+	{
+		while (place_holder_position > 0)
+		{
+			print_com("rra", stacks);
+			place_holder_position--;
+		}
+	}
+	else
+	{
+		while (place_holder_position > 0)
+		{
+			print_com("ra", stacks);
+			place_holder_position--;
+		}
+	}
+}
+
+void	place_holder_to_b(t_head *stacks, int current_chunk)
+{
+	int	place_holder_position;
+	
 	place_holder_position = get_place_holder_position(stacks, current_chunk);
-	// двигаем на топ
+	lift_up_place_holder(stacks, place_holder_position);
 	order_b(stacks, stacks->a->value);
+	l_pushb(stacks);
+	ft_putstr("pb");
+}
+
+int		get_chunks_cnt(int ac)
+{
+	if (ac <= 100)
+		return (ac / 20);
+	else if (ac <= 450) 
+		return (ac / 100 + 5);
+	else
+		return (ac / 100 + 6);	
+}
+
+void	swap(int *a, int *b)
+{
+	int	tmp;
+	
+	tmp = *b;
+	*b = *a;
+	*a = tmp;
+}
+
+int		partition(int *a, int l, int r)
+{
+	int v = a[(l + r) / 2];
+	int i = l;
+	int j = r;
+	while (i <= j)
+	{
+		while (a[i] < v)
+			i++;
+		while (a[j] > v)
+			j--;
+		if (i < j)
+			swap(&a[i++], &a[j--]);
+		else
+			i++;
+	}
+	return j;
+}
+
+void	quick_sort(int *a, int l, int r)
+{
+	int q;
+	if (l < r)
+	{
+		q = partition(a, l, r);
+		quick_sort(a, l, q);
+		quick_sort(a, q + 1, r);
+	}
+}
+
+void	prepare_args(t_head *stacks)
+{
+	int	i;
+
+	i = 1;
+	while (i < stacks->ac)
+	{
+		stacks->sorted_args[i - 1] = ft_atoi(stacks->av[i]);
+		i++;
+	}
 }
 
 void	algorithm_over_5(t_head *stacks) {
@@ -287,13 +434,13 @@ void	algorithm_over_5(t_head *stacks) {
 	int	i;
 	
 	current_chunk = 0;
-	stacks->sorted_args = (int *)malloc(sizeof(int) * stacks->ac);
-	stacks->sorted_args = quick_sort(stacks->av); // не готово
-	fill_stack_a(stacks);
+	stacks->sorted_args = (int *)malloc(sizeof(int) * (stacks->ac - 1));
+	prepare_args(stacks);
+	quick_sort(stacks->sorted_args, 0, stacks->ac - 2); // не готово
 	i = 1;
 	chunks_cnt = get_chunks_cnt(stacks->ac); // не готово +100 делить на 6
 	stacks->chunk_size = stacks->ac / chunks_cnt;
-	fill_chunks(stacks, chunks_cnt); // have to malloc args, last massive must be null terminated;
+	fill_chunks(stacks, chunks_cnt);
 	while (stacks->a) 
 	{
 		if (i == stacks->chunk_size) 
@@ -312,26 +459,16 @@ void	algorithm_over_5(t_head *stacks) {
 	}
 }
 
-void	algorithm(char** argv, int ac)
+void	algorithm(char** argv, int ac, t_head *stacks)
 {
-	t_head	*stacks;
 	int		i;
 	
 	i = 0;
-	stacks->ac = ac;
-	stacks->av = argv;
-	stacks = (t_head*)malloc(sizeof(t_head));
-	stacks->a = NULL;
-	stacks->b = NULL;
-	// while (i < ac - 1) {
-	// 	stacks->a = l_add_first(stacks->a, ft_atoi(argv[ac - 1])); // засунуть внутрь всех алгоритмов ниже;
-	// 	i++;
-	// }
 	if (ac < 4) {
-		algorithm_3(stacks);	
+//		algorithm_3(stacks);	
 	}
 	else if (ac < 7) {
-		algorithm_5(stacks);
+//		algorithm_5(stacks);
 	}
 	else {
 		algorithm_over_5(stacks);

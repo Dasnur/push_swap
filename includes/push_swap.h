@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 14:54:51 by atote             #+#    #+#             */
-/*   Updated: 2020/07/11 19:31:23 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/12 19:11:45 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_head
 	// char			*line;
 }					t_head;
 
+void				algorithm(char** argv, int ac, t_head *stacks);
 t_lst				*l_add_first(t_lst *head, int value);
 void				l_print(t_lst *head);
 t_lst				*l_reverse_rotate(t_lst *a);
@@ -50,7 +51,7 @@ int					ft_printf(char *line, ...);
 void				print_all(t_head *stacks, int n);
 int					check_argv(char *res);
 int					check_dupl(t_lst *a, int check);
-int					valid_arg(char **argv, int argc);
+int					valid_arg(char **argv, int argc, t_head *stacks);
 int					exc(void);
 int					find_maxi(t_lst a);
 int					find_mini(t_lst a);
