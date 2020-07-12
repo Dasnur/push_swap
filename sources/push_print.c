@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:31:27 by atote             #+#    #+#             */
-/*   Updated: 2020/03/09 14:54:27 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/11 15:44:44 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	print_all(t_head *stacks, int n)
 		lenf = 0;
 		if (tmpa)
 		{
-			ft_printf("%s{green}", ft_itoa(tmpa->value));
+			printf(ft_itoa(tmpa->value));
 			tmpv = tmpa->value;
 			while (tmpv > 0)
 			{

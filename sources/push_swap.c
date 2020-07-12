@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:05:53 by atote             #+#    #+#             */
-/*   Updated: 2020/03/09 14:49:04 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/11 18:29:49 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,15 @@ int		find_maxi(t_lst a)
 
 int		main(int argc, char **argv)
 {
-	t_head	*stacks;
-	int		n;
-
-	stacks = (t_head*)malloc(sizeof(t_head));
-	stacks->a = NULL;
-	stacks->b = NULL;
 	if (argc == 1)
 	{
-		free(stacks);
 		return (0);
 	}
-	n = argc - 1;
-	if (!valid_arg(stacks, argv, argc, 1))
+	if (!valid_arg(argv, argc))
 	{
-		free(stacks);
 		return (0);
 	}
-	al_min(stacks, n);
+	algorithm(argv, argc);
 	free_all(stacks);
 	free(stacks);
 	return (0);

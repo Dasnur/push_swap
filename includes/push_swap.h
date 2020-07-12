@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 14:54:51 by atote             #+#    #+#             */
-/*   Updated: 2020/03/09 14:59:14 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/11 19:31:23 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ typedef struct		s_head
 {
 	t_lst			*a;
 	t_lst			*b;
-	int				fv;
-	char			*line;
+	int				**chunks;
+	int				*sorted_args;
+	char			**av;
+	int				ac;
+	int				chunk_size;
+	
+	// int				fv; //delete me pls
+	// char			*line;
 }					t_head;
 
 t_lst				*l_add_first(t_lst *head, int value);
@@ -44,7 +50,7 @@ int					ft_printf(char *line, ...);
 void				print_all(t_head *stacks, int n);
 int					check_argv(char *res);
 int					check_dupl(t_lst *a, int check);
-int					valid_arg(t_head *stacks, char **argv, int argc, int fv);
+int					valid_arg(char **argv, int argc);
 int					exc(void);
 int					find_maxi(t_lst a);
 int					find_mini(t_lst a);

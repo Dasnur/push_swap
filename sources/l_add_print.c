@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:08:17 by atote             #+#    #+#             */
-/*   Updated: 2020/03/09 14:49:17 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/11 17:56:38 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,18 @@ int		check_dupl(t_lst *a, int check)
 	return (0);
 }
 
-int		valid_arg(t_head *stacks, char **argv, int argc, int fv)
+int		valid_arg(char **argv, int argc)
 {
-	while (argc > fv)
+	while (argc > 1)
 	{
 		if (check_argv(argv[argc - 1]))
 		{
-			if (check_dupl(stacks->a, ft_atoi(argv[argc - 1])))
+			if (check_dupl(a, ft_atoi(argv[argc - 1])))
 				return (exc());
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == -1)
 				return (exc());
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == 0)
 				return (exc());
-			stacks->a = l_add_first(stacks->a, ft_atoi(argv[argc - 1]));
 			argc--;
 		}
 		else
