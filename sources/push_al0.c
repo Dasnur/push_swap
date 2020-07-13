@@ -56,56 +56,6 @@ void	print_com(char *res, t_head *stacks)
 	}
 }
 
-void	al_min_help1(t_head *stacks, int *countshag)
-{
-	int		t;
-	int		mini;
-
-	while (l_count_elem(stacks->b))
-	{
-		mini = find_maxi(*stacks->b);
-		if (mini > ((l_count_elem(stacks->b)) / 2))
-			t = l_count_elem(stacks->b) - mini;
-		else
-			t = mini;
-		while (t > 0)
-		{
-			if (mini > ((l_count_elem(stacks->b)) / 2))
-				print_com("rrb", stacks);
-			else
-				print_com("rb", stacks);
-			t--;
-		}
-		l_pusha(stacks);
-		ft_putstr("pa\n");
-		if (*countshag == 0)
-			print_com("ra", stacks);
-	}
-	*countshag = *countshag + 1;
-}
-
-void	al_min_help2(t_head *stacks)
-{
-	int		mini;
-	int		t;
-
-	mini = find_mini(*stacks->a);
-	if (mini > ((l_count_elem(stacks->a)) / 2))
-		t = l_count_elem(stacks->a) - mini;
-	else
-		t = mini;
-	while (t > 0)
-	{
-		if (mini > ((l_count_elem(stacks->a)) / 2))
-			print_com("rra", stacks);
-		else
-			print_com("ra", stacks);
-		t--;
-	}
-	l_pushb(stacks);
-	ft_putstr("pb\n");
-}
-
 void	fill_stack_a(t_head *stacks)
 {
 	int	i;
@@ -478,23 +428,93 @@ void	algorithm_over_5(t_head *stacks) {
 	}
 }
 
+int		get_case(t_head *stacks)
+{
+	t_lst *tmp;
+
+	tmp = stacks->a;
+	if (tmp->value > tmp->next->value && tmp->value < tmp->next->next->value)
+	{
+		if (tmp->next->value < tmp->next->next->value)
+			return (1);
+		else
+			return (5);
+	}
+	if (tmp->value > tmp->next->value && tmp->value > tmp->next->next->value)
+	{
+		if (tmp->next->value > tmp->next->next->value)
+			return (2);
+		else
+			return (3);
+	}
+	if (tmp->value < tmp->next->value && tmp->value < tmp->next->next->value)
+	{
+		if (tmp->next->value < tmp->next->next->value)
+			return (0);
+		else
+			return (4);
+	}
+}
+
+void	handling_case(int alg_case)
+{
+	if (alg_case == 1)
+		ft_putstr("sa");
+	else if (alg_case == 2)
+	{
+		ft_putstr("sa");
+		ft_putstr("rra");
+	}
+	else if (alg_case == 3)
+		ft_putstr("ra");
+	else if (alg_case == 4)
+	{
+		ft_putstr("sa");
+		ft_putstr("ra");
+	}
+	else if (alg_case == 5)
+		ft_putstr("rra");
+}
+
+void	algorithm3(t_head *stacks)
+{
+	int alg_case;
+
+	if (alg_case = get_case(stacks))
+		handling_case(alg_case);
+}
+
+void	algorithm_2(t_head *stacks)
+{
+	if (stacks->a->value > stacks->a->next->value)
+		ft_putstr("sa");
+}
+
 void	algorithm(char** argv, int ac, t_head *stacks)
 {
 	int		i;
 	
 	i = 0;
-	if (ac < 4) {
-//		algorithm_3(stacks);	
+	if (ac < 3)
+	{
+		algorithm_2(stacks);
 	}
-	else if (ac < 7) {
+	else if (ac < 4)
+	{
+		algorithm_3(stacks);	
+	}
+	else if (ac < 7)
+	{
 //		algorithm_5(stacks);
 	}
-	else {
+	else
+	{
 		algorithm_over_5(stacks);
 	}
 	t_lst *tmp;
 	tmp = stacks->a;
-	while (tmp) {
+	while (tmp)
+	{
 		printf("%d ", tmp->value);
 		tmp = tmp->next;
 	}
