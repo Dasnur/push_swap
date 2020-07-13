@@ -522,6 +522,11 @@ void	algorithm_2(t_head *stacks)
 		ft_putstr("sa");
 }
 
+void	algorithm_m(t_head *stacks)
+{
+	
+}
+
 void	algorithm(char** argv, int ac, t_head *stacks)
 {
 	int		i;
