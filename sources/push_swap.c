@@ -12,54 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-int		find_mini(t_lst a)
-{
-	t_lst	*tmp;
-	int		min;
-	int		i;
-	int		place;
-
-	i = 0;
-	place = 0;
-	min = a.value;
-	tmp = &a;
-	while (tmp)
-	{
-		if (min > tmp->value)
-		{
-			min = tmp->value;
-			place = i;
-		}
-		tmp = tmp->next;
-		i++;
-	}
-	return (place);
-}
-
-int		find_maxi(t_lst a)
-{
-	t_lst	*tmp;
-	int		max;
-	int		i;
-	int		place;
-
-	i = 0;
-	place = 0;
-	max = a.value;
-	tmp = &a;
-	while (tmp)
-	{
-		if (max < tmp->value)
-		{
-			max = tmp->value;
-			place = i;
-		}
-		tmp = tmp->next;
-		i++;
-	}
-	return (place);
-}
-
 t_head	*init(t_head * stacks, int ac, char **argv)
 {
 	stacks = (t_head*)malloc(sizeof(t_head));
