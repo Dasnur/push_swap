@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:08:17 by atote             #+#    #+#             */
-/*   Updated: 2020/07/12 19:10:37 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 15:30:57 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 int		check_dupl(t_lst *a, int check)
 {
 	t_lst	*tmp;
+	int		count_same;
 
+	count_same = 0;
 	tmp = a;
 	while (tmp)
 	{
 		if (tmp->value == check)
-			return (1);
-		else
-			tmp = tmp->next;
+			count_same++;
+		tmp = tmp->next;
 	}
-	return (0);
+	if (count_same == 1)
+		return (0);
+	return (1);
 }
 
 int		valid_arg(char **argv, int argc, t_head *stacks)
@@ -33,8 +36,12 @@ int		valid_arg(char **argv, int argc, t_head *stacks)
 	{
 		if (check_argv(argv[argc - 1]))
 		{
+			// ft_putstr(argv[argc - 1]);
+			// ft_putstr("\n");
 			if (check_dupl(stacks->a, ft_atoi(argv[argc - 1])))
 				return (exc());
+			// ft_putstr(argv[argc - 1]);
+			// ft_putstr("\n");
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == -1)
 				return (exc());
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == 0)

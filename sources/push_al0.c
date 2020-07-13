@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:23:16 by atote             #+#    #+#             */
-/*   Updated: 2020/07/12 19:25:36 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 17:04:40 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	fill_stack_a(t_head *stacks)
 
 	k = 0;
 	i = stacks->ac;
+	// ft_putstr("dasf");
+	// stacks->a = l_add_first(stacks->a, ft_atoi(stacks->av[i - 1])); 
 	while (k < stacks->ac - 1)
 	{
 		stacks->a = l_add_first(stacks->a, ft_atoi(stacks->av[i - 1])); 
@@ -175,7 +177,7 @@ int		get_stack_size(t_lst *l) {
 	return size;
 }
 
-void	define_place_holders(int *place_holder_top, int *place_holder_bottom, t_head *stacks, int current_chunk)
+void	define_place_holders(int *place_holder_bottom, int *place_holder_top, t_head *stacks, int current_chunk)
 {
 	t_lst *tmp;
 	int	i;
@@ -197,12 +199,17 @@ void	define_place_holders(int *place_holder_top, int *place_holder_bottom, t_hea
 
 int		get_place_holder_position(t_head *stacks, int current_chunk)
 {
-	int	*place_holder_top;
+	int	place_holder_top_;
+	int	place_holder_bottom_;
 	int	*place_holder_bottom;
+	int	*place_holder_top;
 
-	*place_holder_bottom = -1;
-	*place_holder_top = -1;
+	place_holder_bottom_ = -1;
+	place_holder_top_ = -1;
+	place_holder_bottom = &place_holder_bottom_;
+	place_holder_top = &place_holder_top_;
 	define_place_holders(place_holder_bottom, place_holder_top, stacks, current_chunk);
+	printf("%d %d %d \n", place_holder_bottom_, place_holder_top_, current_chunk);
 	if (get_stack_size(stacks->a) - *place_holder_bottom < *place_holder_top)
 		return (*place_holder_bottom);
 	return *place_holder_top;
@@ -215,10 +222,13 @@ int		get_gap_index(t_head *stacks)
 	
 	tmp = stacks->b;
 	gap_index = 1;
+	if (tmp == NULL)
+		return (0);
 	while (tmp->next)
 	{
-		if (tmp->value > tmp->next->value)
+		if (tmp->value < tmp->next->value)
 			return gap_index;
+		tmp = tmp->next;
 		gap_index++;
 	}
 	return 0;
@@ -228,8 +238,10 @@ int		handling_sorted_b_case(int gap_index, int value, t_lst *tmp)
 {
 	int	i;
 
-	i = 0;	 
-	while (value < tmp->value) 
+	i = 0;
+	if (tmp == NULL)
+		return (i);
+	while (tmp && value < tmp->value) 
 	{
 		tmp = tmp->next;
 		i++;
@@ -263,9 +275,9 @@ int		get_target_position(t_head *stacks, int gap_index, int value)
 	tmp = stacks->b;
 	i = 0;
 	if (gap_index == 0)
-		handling_sorted_b_case(gap_index, value, tmp);
+		return (handling_sorted_b_case(gap_index, value, tmp));
 	if (value > tmp->value) 
-		handling_unsorted_b_after_gap(value, tmp, gap_index);
+		return (handling_unsorted_b_after_gap(value, tmp, gap_index));
 	else
 	{
 		while (value < tmp->value && i < gap_index) 
@@ -293,7 +305,7 @@ void	order_b(t_head *stacks, int value)
 		position = get_stack_size(stacks->b) - position;
 		while (position > 0)
 		{
-			print_com("rb", stacks);
+			print_com("rrb", stacks);
 			position--;
 		}
 	}
@@ -301,7 +313,7 @@ void	order_b(t_head *stacks, int value)
 	{
 		while (position > 0)
 		{
-			print_com("rrb", stacks);
+			print_com("rb", stacks);
 			position--;
 		}
 	}	
@@ -338,12 +350,15 @@ void	sort_b(t_head *stacks)
 
 void	lift_up_place_holder(t_head *stacks, int place_holder_position)
 {
-	if (place_holder_position > get_stack_size(stacks->a) / 2)
+	int		stack_size;
+
+	stack_size = get_stack_size(stacks->a);
+	if (place_holder_position > stack_size / 2)
 	{
-		while (place_holder_position > 0)
+		while (stack_size - place_holder_position > 0)
 		{
 			print_com("rra", stacks);
-			place_holder_position--;
+			place_holder_position++;
 		}
 	}
 	else
@@ -364,11 +379,13 @@ void	place_holder_to_b(t_head *stacks, int current_chunk)
 	lift_up_place_holder(stacks, place_holder_position);
 	order_b(stacks, stacks->a->value);
 	l_pushb(stacks);
-	ft_putstr("pb");
+	ft_putstr("pb\n");
 }
 
 int		get_chunks_cnt(int ac)
 {
+	if (ac < 20)
+		return (1);
 	if (ac <= 100)
 		return (ac / 20);
 	else if (ac <= 450) 
@@ -439,7 +456,7 @@ void	algorithm_over_5(t_head *stacks) {
 	quick_sort(stacks->sorted_args, 0, stacks->ac - 2); // не готово
 	i = 1;
 	chunks_cnt = get_chunks_cnt(stacks->ac); // не готово +100 делить на 6
-	stacks->chunk_size = stacks->ac / chunks_cnt;
+	stacks->chunk_size = (int)(stacks->ac / chunks_cnt);
 	fill_chunks(stacks, chunks_cnt);
 	while (stacks->a) 
 	{
@@ -448,12 +465,14 @@ void	algorithm_over_5(t_head *stacks) {
 			i = 1;
 			current_chunk++;
 		}
-		place_holder_to_b(stacks, current_chunk); // не готово
+		place_holder_to_b(stacks, current_chunk);
 		i++;
 	}
+	i = 0;
 	sort_b(stacks);
 	while (i < stacks->ac) 
 	{
+		l_pusha(stacks);
 		ft_putstr("pa\n");
 		i++;
 	}
@@ -472,5 +491,11 @@ void	algorithm(char** argv, int ac, t_head *stacks)
 	}
 	else {
 		algorithm_over_5(stacks);
+	}
+	t_lst *tmp;
+	tmp = stacks->a;
+	while (tmp) {
+		printf("%d ", tmp->value);
+		tmp = tmp->next;
 	}
 }
