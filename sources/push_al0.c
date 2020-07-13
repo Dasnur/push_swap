@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:23:16 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 19:50:54 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 21:31:21 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_head	*init(t_head * stacks, int ac, char **argv)
 	stacks = (t_head*)malloc(sizeof(t_head));
 	stacks->ac = ac;
 	stacks->av = argv;
+	stacks->flag_visual = 1;
 	stacks->a = NULL;
 	stacks->b = NULL;
 	return stacks;
@@ -72,6 +73,8 @@ void	fill_stack_a(t_head *stacks)
 	int	k;
 
 	k = 0;
+	if (stacks->flag_visual == 2)
+		k = 1;
 	i = stacks->ac;
 	// ft_putstr("dasf");
 	// stacks->a = l_add_first(stacks->a, ft_atoi(stacks->av[i - 1])); 
@@ -369,7 +372,7 @@ int		get_chunks_cnt(int ac)
 	else if (ac <= 450) 
 		return (ac / 100 + 5);
 	else
-		return (ac / 100 + 6);	
+		return (ac / 100 + 5);	
 }
 
 void	swap(int *a, int *b)
@@ -491,24 +494,24 @@ int		get_case(t_head *stacks)
 void	handling_case(int alg_case)
 {
 	if (alg_case == 1)
-		ft_putstr("sa");
+		ft_putstr("sa\n");
 	else if (alg_case == 2)
 	{
-		ft_putstr("sa");
-		ft_putstr("rra");
+		ft_putstr("sa\n");
+		ft_putstr("rra\n");
 	}
 	else if (alg_case == 3)
-		ft_putstr("ra");
+		ft_putstr("ra\n");
 	else if (alg_case == 4)
 	{
-		ft_putstr("sa");
-		ft_putstr("ra");
+		ft_putstr("sa\n");
+		ft_putstr("ra\n");
 	}
 	else if (alg_case == 5)
-		ft_putstr("rra");
+		ft_putstr("rra\n");
 }
 
-void	algorithm3(t_head *stacks)
+void	algorithm_3(t_head *stacks)
 {
 	int alg_case;
 
@@ -519,7 +522,7 @@ void	algorithm3(t_head *stacks)
 void	algorithm_2(t_head *stacks)
 {
 	if (stacks->a->value > stacks->a->next->value)
-		ft_putstr("sa");
+		ft_putstr("sa\n");
 }
 
 void	algorithm(char** argv, int ac, t_head *stacks)
@@ -527,17 +530,17 @@ void	algorithm(char** argv, int ac, t_head *stacks)
 	int		i;
 	
 	i = 0;
-	if (ac < 3)
+	if (ac == 3)
 	{
 		algorithm_2(stacks);
 	}
-	else if (ac < 4)
+	else if (ac == 4)
 	{
 		algorithm_3(stacks);	
 	}
 	else if (ac < 7)
 	{
-//		algorithm_5(stacks);
+		// algorithm_5(stacks);
 	}
 	else
 	{

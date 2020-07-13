@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 14:54:51 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 19:18:56 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 21:14:23 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include "../ft_printf/includes/libftprintf.h"
 # include "../libft/libft.h"
 
 typedef struct		s_lst
@@ -33,10 +34,11 @@ typedef struct		s_head
 	int				ac;
 	int				chunk_size;
 	
-	int				fv; //delete me pls
+	int				flag_visual; //delete me pls
 	char			*line;
 }					t_head;
 
+int					ft_printf(char *line, ...);
 t_head				*init(t_head * stacks, int ac, char **argv);
 void				algorithm(char** argv, int ac, t_head *stacks);
 t_lst				*l_add_first(t_lst *head, int value);
@@ -52,7 +54,7 @@ int					ft_printf(char *line, ...);
 void				print_all(t_head *stacks, int n);
 int					check_argv(char *res);
 int					check_dupl(t_lst *a, int check);
-int					valid_arg(char **argv, int argc, t_head *stacks);
+int					valid_arg(char **argv, int argc, t_head *stacks, int flag_visual);
 int					exc(void);
 int					find_maxi(t_lst a);
 int					find_mini(t_lst a);

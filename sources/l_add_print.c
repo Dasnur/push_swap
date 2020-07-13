@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:08:17 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 18:27:13 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 21:12:06 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int		check_dupl(t_lst *a, int check)
 	return (1);
 }
 
-int		valid_arg(char **argv, int argc, t_head *stacks)
+int		valid_arg(char **argv, int argc, t_head *stacks, int flag_visual)
 {
-	while (argc > 1)
+	while (argc > flag_visual)
 	{
 		if (check_argv(argv[argc - 1]))
 		{
