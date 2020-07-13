@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:08:17 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 15:30:57 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 18:27:13 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ int		valid_arg(char **argv, int argc, t_head *stacks)
 	{
 		if (check_argv(argv[argc - 1]))
 		{
-			// ft_putstr(argv[argc - 1]);
-			// ft_putstr("\n");
 			if (check_dupl(stacks->a, ft_atoi(argv[argc - 1])))
 				return (exc());
-			// ft_putstr(argv[argc - 1]);
-			// ft_putstr("\n");
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == -1)
 				return (exc());
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == 0)

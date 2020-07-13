@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:05:17 by atote             #+#    #+#             */
-/*   Updated: 2020/03/09 14:38:52 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 19:20:09 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,16 +105,13 @@ int		main(int argc, char **argv)
 {
 	t_head	*stacks;
 
-	stacks = (t_head*)malloc(sizeof(t_head));
-	stacks->fv = 1;
-	stacks->a = NULL;
-	stacks->b = NULL;
-	stacks->line = NULL;
+	stacks = init(stacks, argc, argv);
+	fill_stack_a(stacks);
 	if (argc == 1)
 		return (descision(stacks, stacks->line));
 	if (ft_strcmp("-v", argv[1]) == 0)
 		stacks->fv = 2;
-	if (!valid_arg(stacks, argv, argc, stacks->fv))
+	if (!valid_arg(argv, argc, stacks))
 		return (descision(stacks, stacks->line));
 	while (get_next_line(0, &stacks->line))
 	{

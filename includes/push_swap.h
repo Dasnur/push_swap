@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 14:54:51 by atote             #+#    #+#             */
-/*   Updated: 2020/07/12 19:11:45 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 19:18:56 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ typedef struct		s_head
 	int				ac;
 	int				chunk_size;
 	
-	// int				fv; //delete me pls
-	// char			*line;
+	int				fv; //delete me pls
+	char			*line;
 }					t_head;
 
+t_head				*init(t_head * stacks, int ac, char **argv);
 void				algorithm(char** argv, int ac, t_head *stacks);
 t_lst				*l_add_first(t_lst *head, int value);
 void				l_print(t_lst *head);

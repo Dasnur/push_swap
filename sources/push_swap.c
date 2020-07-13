@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:05:53 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 15:31:01 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 18:43:59 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,6 @@ int		find_maxi(t_lst a)
 		i++;
 	}
 	return (place);
-}
-
-t_head	*init(t_head * stacks, int ac, char **argv)
-{
-	stacks = (t_head*)malloc(sizeof(t_head));
-	stacks->ac = ac;
-	stacks->av = argv;
-	stacks->a = NULL;
-	stacks->b = NULL;
-	return stacks;
 }
 
 int		main(int argc, char **argv)
