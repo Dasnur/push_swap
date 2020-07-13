@@ -508,12 +508,60 @@ void	handling_case(int alg_case)
 		ft_putstr("rra");
 }
 
-void	algorithm3(t_head *stacks)
+void	algorithm_3(t_head *stacks)
 {
 	int alg_case;
 
 	if (alg_case = get_case(stacks))
 		handling_case(alg_case);
+}
+
+int		get_max_arg_index(t_lst a)
+{
+	t_lst	*tmp;
+	int		max;
+	int		i;
+	int		place;
+
+	i = 0;
+	place = 0;
+	max = a.value;
+	tmp = &a;
+	while (tmp)
+	{
+		if (max < tmp->value)
+		{
+			max = tmp->value;
+			place = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (place);
+}
+
+int		get_min_arg_index(t_lst a)
+{
+	t_lst	*tmp;
+	int		min;
+	int		i;
+	int		place;
+
+	i = 0;
+	place = 0;
+	min = a.value;
+	tmp = &a;
+	while (tmp)
+	{
+		if (min > tmp->value)
+		{
+			min = tmp->value;
+			place = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (place);
 }
 
 void	algorithm_2(t_head *stacks)
@@ -522,9 +570,32 @@ void	algorithm_2(t_head *stacks)
 		ft_putstr("sa");
 }
 
-void	algorithm_m(t_head *stacks)
+void	push_b_min(t_head *stacks)
 {
-	
+	int		min_arg_index;
+	int		max_arg_index;
+	t_lst	*tmp;
+
+	tmp = stacks->a;
+	min_arg_index = get_min_arg_index(*tmp);
+	lift_up_place_holder(stacks, min_arg_index);
+	l_pushb(stacks);
+	ft_putstr("pb");
+}
+
+void	algorithm_4(t_head *stacks)
+{
+	push_b_min(stacks);
+	algorithm3(stacks);
+	print_com("pa", stacks);
+}
+
+void	algorithm_5(t_head *stacks)
+{
+	push_b_min(stacks);
+	algorithm_3(stacks);
+	print_com("pa", stacks);
+	print_com("pa", stacks);
 }
 
 void	algorithm(char** argv, int ac, t_head *stacks)
@@ -533,17 +604,13 @@ void	algorithm(char** argv, int ac, t_head *stacks)
 	
 	i = 0;
 	if (ac < 3)
-	{
 		algorithm_2(stacks);
-	}
 	else if (ac < 4)
-	{
 		algorithm_3(stacks);	
-	}
+	else if (ac < 6)
+		algorithm_4(stacks);
 	else if (ac < 7)
-	{
-//		algorithm_5(stacks);
-	}
+		algorithm_5(stacks);
 	else
 	{
 		algorithm_over_5(stacks);
