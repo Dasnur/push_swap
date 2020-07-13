@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:23:16 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 21:37:39 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/13 22:01:36 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -472,8 +472,6 @@ int		get_case(t_head *stacks)
 	{
 		if (tmp->next->value < tmp->next->next->value)
 			return (1);
-		else
-			return (5);
 	}
 	if (tmp->value > tmp->next->value && tmp->value > tmp->next->next->value)
 	{
@@ -489,6 +487,8 @@ int		get_case(t_head *stacks)
 		else
 			return (4);
 	}
+	if (tmp->value < tmp->next->value && tmp->value > tmp->next->next->value)
+		return (5);
 }
 
 void	handling_case(int alg_case)
@@ -583,21 +583,24 @@ void	push_b_min(t_head *stacks)
 	min_arg_index = get_min_arg_index(*tmp);
 	lift_up_place_holder(stacks, min_arg_index);
 	l_pushb(stacks);
-	ft_putstr("pb");
+	ft_putstr("pb\n");
 }
 
 void	algorithm_4(t_head *stacks)
 {
+	if (hmm(stacks))
+		return ;
 	push_b_min(stacks);
-	algorithm3(stacks);
+	algorithm_3(stacks);
 	print_com("pa", stacks);
 }
 
 void	algorithm_5(t_head *stacks)
 {
+	if (hmm(stacks))
+		return ;
 	push_b_min(stacks);
-	algorithm_3(stacks);
-	print_com("pa", stacks);
+	algorithm_4(stacks);
 	print_com("pa", stacks);
 }
 
