@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:23:16 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 22:01:36 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/14 12:48:38 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -449,7 +449,6 @@ void	algorithm_over_5(t_head *stacks) {
 			i = 0;
 			current_chunk++;
 		}
-		// printf("\n i-->%d \n", i);
 		place_holder_to_b(stacks, current_chunk);
 		i++;
 	}
@@ -461,6 +460,13 @@ void	algorithm_over_5(t_head *stacks) {
 		ft_putstr("pa\n");
 		i++;
 	}
+	free(stacks->sorted_args);
+	i = 0;
+	while (i < chunks_cnt) {
+		free(stacks->chunks[i]);
+		i++;
+	}
+	free(stacks->chunks);
 }
 
 int		get_case(t_head *stacks)

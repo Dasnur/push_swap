@@ -13,7 +13,7 @@ def make_bash(a,b,n):
 		f.writelines('\n')
 		f.writelines('./push_swap $ARG | wc -l')
 		f.writelines('\n')
-		f.writelines('./push_swap $ARG | ./checker $ARG')
+		f.writelines('./push_swap $ARG | ./checker -v $ARG')
 		f.writelines('\n')
 
 

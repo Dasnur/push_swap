@@ -6,7 +6,7 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:05:17 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 21:48:02 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/14 12:58:28 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		rr_rrr_print(t_head *stacks, char *line, int argc, int fv)
 	if (fv == 2)
 	{
 		print_all(stacks, argc - 2);
-		system("sleep 0.1");
+		system("sleep 0.5");
 		system("clear");
 	}
 	return (1);
@@ -111,11 +111,11 @@ int		main(int argc, char **argv)
 	t_head	*stacks;
 
 	stacks = init(stacks, argc, argv);
-	fill_stack_a(stacks);
 	if (argc == 1)
 		return (descision(stacks, stacks->line));
 	if (ft_strcmp("-v", argv[1]) == 0)
 		stacks->flag_visual = 2;
+	fill_stack_a(stacks);
 	if (!valid_arg(argv, argc, stacks, stacks->flag_visual))
 		return (descision(stacks, stacks->line));
 	while (get_next_line(0, &stacks->line))
@@ -129,10 +129,10 @@ int		main(int argc, char **argv)
 		free_line(&stacks->line);
 	}
 	descision(stacks, stacks->line);
-	t_lst *tmp = stacks->a;
-	while (tmp) {
-		printf("%d ", tmp->value);
-		tmp = tmp->next;
-	}
+	// t_lst *tmp = stacks->a;
+	// while (tmp) {
+	// 	printf("%d ", tmp->value);
+	// 	tmp = tmp->next;
+	// }
 	return (0);
 }
