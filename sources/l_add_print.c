@@ -6,10 +6,11 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 18:08:17 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 21:12:06 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/26 12:16:34 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft/libft.h"
 #include "../includes/push_swap.h"
 
 int		check_dupl(t_lst *a, int check)

@@ -6,14 +6,14 @@
 #    By: atote <atote@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/04 17:58:09 by atote             #+#    #+#              #
-#    Updated: 2020/07/11 14:30:00 by atote            ###   ########.fr        #
+#    Updated: 2020/07/26 14:53:46 by atote            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_C:= checker
 NAME_PS:= push_swap
-FILE_C:= checker push_com l_add_print push_print push_free
-FILE_PS:= push_swap push_al0 l_add_print push_com push_print
+FILE_C:= checker push_com l_add_print push_print push_free init_fill_a
+FILE_PS:= push_swap push_al0 l_add_print push_com push_print init_fill_a algorithms_under_5 algorithms_under_5_help quick_sort_das get_target_position order_b chunks_operators place_holders
 
 LFTDIR:=./libft
 PFDIR:=./ft_printf

@@ -6,10 +6,11 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 16:31:27 by atote             #+#    #+#             */
-/*   Updated: 2020/07/13 21:48:18 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/26 12:16:51 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft/libft.h"
 #include "../includes/push_swap.h"
 
 void	free_all(t_head *stacks)

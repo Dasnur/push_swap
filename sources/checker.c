@@ -6,12 +6,12 @@
 /*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:05:17 by atote             #+#    #+#             */
-/*   Updated: 2020/07/14 12:58:28 by atote            ###   ########.fr       */
+/*   Updated: 2020/07/26 13:44:46 by atote            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
 #include "../libft/libft.h"
+#include "../includes/push_swap.h"
 #include "../ft_printf/includes/libftprintf.h"
 
 int		sa_rb_com(t_head *stacks, char *line)
@@ -92,11 +92,6 @@ int		descision(t_head *stacks, char *line)
 		ft_putstr("OK\n");
 	if (!hmm(stacks) && stacks && stacks->a)
 		ft_putstr("KO\n");
-	t_lst *tmp = stacks->a;
-	while (tmp) {
-		printf("%d ", tmp->value);
-		tmp = tmp->next;
-	}
 	free_all(stacks);
 	if (stacks)
 	{
@@ -110,6 +105,7 @@ int		main(int argc, char **argv)
 {
 	t_head	*stacks;
 
+	stacks = NULL;
 	stacks = init(stacks, argc, argv);
 	if (argc == 1)
 		return (descision(stacks, stacks->line));
@@ -129,10 +125,5 @@ int		main(int argc, char **argv)
 		free_line(&stacks->line);
 	}
 	descision(stacks, stacks->line);
-	// t_lst *tmp = stacks->a;
-	// while (tmp) {
-	// 	printf("%d ", tmp->value);
-	// 	tmp = tmp->next;
-	// }
 	return (0);
 }
