@@ -6,7 +6,7 @@
 #    By: atote <atote@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/04 17:58:09 by atote             #+#    #+#              #
-#    Updated: 2020/07/26 14:53:46 by atote            ###   ########.fr        #
+#    Updated: 2020/07/26 18:45:25 by atote            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,21 +35,25 @@ all: $(NAME_PS) $(NAME_C)
 
 $(NAME_PS): $(OBJ_PS)
 	@cd $(LFTDIR) && $(MAKE)
+	@cd $(PFDIR) && $(MAKE)
 	@$(COMPILER) $(CFLAGS) $(LFLAGS) $(PFFLAGS) $(OBJ_PS) -o $(NAME_PS)
 
 $(NAME_C): $(OBJ_C)
 	@cd $(LFTDIR) && $(MAKE)
+	@cd $(PFDIR) && $(MAKE)
 	@$(COMPILER) $(CFLAGS) $(LFLAGS) $(PFFLAGS) $(OBJ_C) -o $(NAME_C)
 
 clean:
 	@rm -f $(OBJ_C)
 	@rm -f $(OBJ_PS)
 	@cd $(LFTDIR) && $(MAKE) clean
+	@cd $(PFDIR) && $(MAKE) clean
 
 fclean: clean
 	@rm -f $(NAME_C)
 	@rm -f $(NAME_PS)
 	@cd $(LFTDIR) && $(MAKE) fclean
+	@cd $(PFDIR) && $(MAKE) fclean
 	
 .c.o:
 	gcc -Wall -Wextra -Werror -I includes/ -Ilibft -o $@ -c $<
