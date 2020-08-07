@@ -122,7 +122,7 @@ fclean: clean
 re: fclean all
 
 main: fclean all
-	@gcc $(FILES_MAIN) $(LIBFT)/libft.a
+	@clang $(FILES_MAIN) $(LIBFT)/libft.a
 	@./a.out
 
 test:

@@ -18,7 +18,7 @@ FILE_PS:= push_swap push_al0 l_add_print push_com push_print init_fill_a algorit
 LFTDIR:=./libft
 PFDIR:=./ft_printf
 
-COMPILER:=gcc
+COMPILER:=clang
 SRCPATH:=sources/
 HDRPATH:=includes/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
@@ -36,12 +36,12 @@ all: $(NAME_PS) $(NAME_C)
 $(NAME_PS): $(OBJ_PS)
 	@cd $(LFTDIR) && $(MAKE)
 	@cd $(PFDIR) && $(MAKE)
-	@$(COMPILER) $(CFLAGS) $(LFLAGS) $(PFFLAGS) $(OBJ_PS) -o $(NAME_PS)
+	@$(COMPILER) $(CFLAGS) $(OBJ_PS) -o $(NAME_PS) $(LFLAGS) $(PFFLAGS)
 
 $(NAME_C): $(OBJ_C)
 	@cd $(LFTDIR) && $(MAKE)
 	@cd $(PFDIR) && $(MAKE)
-	@$(COMPILER) $(CFLAGS) $(LFLAGS) $(PFFLAGS) $(OBJ_C) -o $(NAME_C)
+	@$(COMPILER) $(CFLAGS) $(OBJ_C) -o $(NAME_C) $(LFLAGS) $(PFFLAGS)
 
 clean:
 	@rm -f $(OBJ_C)
@@ -56,7 +56,7 @@ fclean: clean
 	@cd $(PFDIR) && $(MAKE) fclean
 	
 .c.o:
-	gcc -Wall -Wextra -Werror -I includes/ -Ilibft -o $@ -c $<
+	clang -Wall -Wextra -Werror -I includes/ -Ilibft -o $@ -c $<
 	
 re: fclean
 	@$(MAKE) all

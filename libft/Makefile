@@ -51,7 +51,7 @@ INC = libft.h
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -I. $(INC) -c $(SRCS)
+	clang -Wall -Wextra -Werror -I. $(INC) -c $(SRCS)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 

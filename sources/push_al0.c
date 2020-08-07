@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 #include "../includes/push_swap.h"
 
 void	print_com(char *res, t_head *stacks)

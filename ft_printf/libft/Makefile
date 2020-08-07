@@ -90,7 +90,7 @@ $(NAME): $(OBJECTS) libft.h
 	ranlib $(NAME)
 
 %.o: %.c
-		gcc $(GCCF) -I $(HEADERS) -c $< -o $@
+		clang $(GCCF) -I $(HEADERS) -c $< -o $@
 
 
 clean:
