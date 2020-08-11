@@ -3,56 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdaway <bdaway@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/19 22:23:38 by bdaway            #+#    #+#             */
-/*   Updated: 2019/09/22 22:50:36 by bdaway           ###   ########.fr       */
+/*   Created: 2019/09/15 21:40:41 by acarlett          #+#    #+#             */
+/*   Updated: 2019/09/26 17:48:05 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static int	ft_count_char(int n)
+static int		getstring(int n)
 {
-	int		len;
+	int		i;
+	int		tmp;
 
-	len = 1;
+	i = 0;
+	tmp = n;
+	while (tmp / 10 != 0 && tmp % 10 != 0)
+	{
+		tmp = tmp / 10;
+		i++;
+	}
 	if (n < 0)
-	{
-		len++;
-		n = -n;
-	}
-	while (n > 9)
-	{
-		len++;
-		n /= 10;
-	}
-	return (len);
+		i++;
+	return (i + 1);
 }
 
-char		*ft_itoa(int n)
+static char		*backwards(char *temp, int n)
 {
-	int		len;
-	char	*str;
+	int		tmp;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	len = ft_count_char(n);
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+	tmp = n;
+	*temp++ = '\0';
+	while (n / 10 != 0 || n % 10 != 0)
+	{
+		if (n % 10 < 0)
+			*temp++ = -1 * (n % 10) + '0';
+		else
+			*temp++ = (n % 10) + '0';
+		n = n / 10;
+	}
+	--temp;
+	if (tmp < 0)
+		*(++temp) = '-';
+	return (temp);
+}
+
+char			*ft_itoa(int n)
+{
+	char	*nbr;
+	char	*temp;
+	char	*temp2;
+	int		tmp;
+
+	nbr = NULL;
+	temp = NULL;
+	tmp = getstring(n);
+	nbr = ft_strnew(tmp);
+	temp = ft_strnew(tmp);
+	temp2 = nbr;
+	if (!nbr)
 		return (NULL);
-	str[len] = '\0';
-	if (n < 0)
-	{
-		n = -n;
-		str[0] = '-';
-	}
-	while (n > 9)
-	{
-		str[len - 1] = (n % 10) + 48;
-		n /= 10;
-		len--;
-	}
-	str[len - 1] = n + 48;
-	return (str);
+	if (n == 0)
+		*nbr++ = '0';
+	temp = backwards(temp, n);
+	while (*temp != '\0')
+		*nbr++ = *temp--;
+	*nbr = '\0';
+	return (temp2);
 }

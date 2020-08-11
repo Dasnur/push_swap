@@ -54,7 +54,7 @@ int					check_argv(char *res);
 int					check_dupl(t_lst *a, int check);
 int					valid_arg(char **argv, int argc, t_head *stacks,
 int flag_visual);
-int					exc(void);
+int					exc(t_head *stacks);
 int					find_maxi(t_lst a);
 int					find_mini(t_lst a);
 int					l_count_elem(t_lst *a);

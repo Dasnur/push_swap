@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_d_u.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgenesis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 20:30:57 by pgenesis          #+#    #+#             */
-/*   Updated: 2020/02/25 20:31:05 by pgenesis         ###   ########.fr       */
+/*   Created: 2019/11/02 17:42:02 by acarlett          #+#    #+#             */
+/*   Updated: 2019/12/21 23:19:17 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_width_more_3(t_params *m, int size_number)
 {
 	while (m->f_check_width != ((m->f_otricatelnoe || m->f_check_plus) +
-			biggest(size_number, m->f_check_presicion)))
+				BIGGEST(size_number, m->f_check_presicion)))
 	{
 		ft_putchar2(' ');
 		m->f_check_width--;

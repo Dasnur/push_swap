@@ -39,14 +39,10 @@ int		main(int argc, char **argv)
 	}
 	stacks = init(stacks, argc, argv);
 	fill_stack_a(stacks);
+	if (!valid_arg(argv, argc, stacks, stacks->flag_visual))
+		return (0);
 	if (!hmm(stacks))
-	{
-		if (!valid_arg(argv, argc, stacks, stacks->flag_visual))
-		{
-			return (0);
-		}
 		algorithm(argc, stacks);
-	}
 	free_stacks_a(stacks->a);
 	free(stacks);
 	return (0);

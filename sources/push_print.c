@@ -56,8 +56,10 @@ int		hmm(t_head *stacks)
 	return (1);
 }
 
-int		exc(void)
+int		exc(t_head *stacks)
 {
+	free_all(stacks);
+	free(stacks);
 	ft_putstr("Error\n");
 	exit(0);
 }

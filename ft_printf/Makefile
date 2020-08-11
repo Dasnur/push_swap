@@ -6,7 +6,7 @@
 #    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 17:36:24 by acarlett          #+#    #+#              #
-#    Updated: 2020/02/26 05:59:13 by pgenesis         ###   ########.fr        #
+#    Updated: 2019/12/24 19:30:39 by acarlett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ ft_putnbr2.c \
 ft_putunsignedlong2.c \
 ft_putlonglong2.c \
 second_help.c \
-macros.c \
 
 FILES_MAIN = srcs/format_d_u.c \
 srcs/format_c.c \
@@ -92,7 +91,6 @@ srcs/ft_putnbr2.c \
 srcs/ft_putunsignedlong2.c \
 srcs/ft_putlonglong2.c \
 srcs/second_help.c \
-macros.c \
 
 SRCS = $(addprefix $(DIR_S)/,$(FILES))
 
@@ -122,7 +120,7 @@ fclean: clean
 re: fclean all
 
 main: fclean all
-	@clang $(FILES_MAIN) $(LIBFT)/libft.a
+	@gcc $(FILES_MAIN) $(LIBFT)/libft.a
 	@./a.out
 
 test:

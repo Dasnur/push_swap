@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/11 21:49:11 by acarlett          #+#    #+#             */
-/*   Updated: 2019/09/11 22:04:13 by acarlett         ###   ########.fr       */
+/*   Created: 2019/09/26 18:21:17 by acarlett          #+#    #+#             */
+/*   Updated: 2019/09/26 18:21:56 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isascii(int c)
+int		*ft_map(int *tab, int length, int (*f)(int))
 {
-	if (c >= 0 && c <= 127)
+	int *result;
+	int i;
+	int *a;
+
+	i = 0;
+	result = (int *)malloc(sizeof(*result) * length);
+	if (!(int *)malloc(sizeof(*result) * length))
+		return (NULL);
+	a = result;
+	while (i < length)
 	{
-		return (1);
+		*result = f(*tab);
+		result++;
+		i++;
+		tab++;
 	}
-	return (0);
+	return (a);
 }

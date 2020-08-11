@@ -34,12 +34,8 @@ int		get_gap_index(t_head *stacks)
 void	order_b(t_head *stacks, int value)
 {
 	int		gap_index;
-	t_lst	*tmp;
-	int		i;
 	int		position;
 
-	i = 0;
-	tmp = stacks->b;
 	gap_index = get_gap_index(stacks);
 	position = get_target_position(stacks, gap_index, value);
 	if (position > get_stack_size(stacks->b) / 2)
@@ -61,11 +57,7 @@ void	order_b(t_head *stacks, int value)
 void	sort_b(t_head *stacks)
 {
 	int		gap_index;
-	t_lst	*tmp;
-	int		i;
 
-	i = 0;
-	tmp = stacks->b;
 	gap_index = get_gap_index(stacks);
 	if (gap_index > get_stack_size(stacks->b) / 2)
 	{

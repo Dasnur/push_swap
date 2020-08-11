@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_f.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgenesis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 20:37:13 by pgenesis          #+#    #+#             */
-/*   Updated: 2020/02/26 06:19:34 by pgenesis         ###   ########.fr       */
+/*   Created: 2019/12/01 13:54:21 by atote             #+#    #+#             */
+/*   Updated: 2019/12/21 23:22:11 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	format_f(char *line, int i, va_list a, int type)
 	m.doubl = (!ft_check_long_f(line, i) ? va_arg(a, double) :
 	va_arg(a, long double));
 	m.long_long_in = m.doubl;
-	if (always_pozitive(m.long_long_in) == MF && ft_check_long_f(line, i))
+	if (ALWAYS_POZITIVE(m.long_long_in) == FOR_DIMA && ft_check_long_f(line, i))
 		return (for_help_f(&m));
 	if (predel_f1(&m))
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgenesis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 20:44:01 by pgenesis          #+#    #+#             */
-/*   Updated: 2020/02/26 06:16:31 by pgenesis         ###   ########.fr       */
+/*   Created: 2019/11/04 17:14:59 by acarlett          #+#    #+#             */
+/*   Updated: 2019/12/15 19:57:41 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	ft_putstr_with_colour(char *res, t_params *m)
 void	print_first_part(t_params *m, int diff)
 {
 	ft_putstr_with_colour(m->cha2, m);
-	if ((diff = always_pozitive((long long int)m->f_check_width)
-				- ft_strlen(m->cha2) + 1) > 0)
+	if ((diff = ALWAYS_POZITIVE(m->f_check_width) - ft_strlen(m->cha2) + 1) > 0)
 	{
 		while (--diff > 0)
 			ft_putchar2(' ');
@@ -49,8 +48,7 @@ void	print_first_part(t_params *m, int diff)
 
 void	print_second_part(t_params *m, int diff)
 {
-	if ((diff = always_pozitive((long long int)m->f_check_width)
-				- ft_strlen(m->cha2) + 1) > 0)
+	if ((diff = ALWAYS_POZITIVE(m->f_check_width) - ft_strlen(m->cha2) + 1) > 0)
 	{
 		while (--diff > 0)
 		{

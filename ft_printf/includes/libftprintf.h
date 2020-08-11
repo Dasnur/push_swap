@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdaway <bdaway@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 21:36:19 by acarlett          #+#    #+#             */
-/*   Updated: 2020/02/26 06:46:06 by pgenesis         ###   ########.fr       */
+/*   Updated: 2019/12/24 19:28:39 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
-# define MF 1444565444646
+# define ALWAYS_POZITIVE(x)	(x >= 0 ? x : -x)
+# define NALICIE_MINUSA(x) (x < 0 ? 1 : 0)
+# define BIGGEST(x,y) (x > y ? x : y)
+# define TWO_OR_ZERO(x,y) (x != 0 && y != 0 ? 2 : 0)
+# define IS_HUNDRED(x) (x < 100 ? 0 : 1)
+# define WHILE_NOT_ZERO(x) (x > 0 ? x - 1 : 0)
+# define ISNULL(x) (x == 0 ? 0 : 1)
+# define FOR_DIMA 1444565444646
 # include <stdlib.h>
 # include <stdarg.h>
-# include <unistd.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 
 int							g_count;
@@ -67,15 +74,6 @@ typedef struct				s_params
 	char					*colour;
 }							t_params;
 
-int							is_null_lli(long long x);
-int							is_null_ulli(unsigned long long x);
-void						ft_putchar2(char c);
-int							is_hundred(int x);
-int							two_or_zero(int x, int y);
-int							biggest(int x, int y);
-int							nalicie_minusa(long long int x);
-long long int				always_pozitive(long long int x);
-int							ft_printf(char *line, ...);
 void						between_p(char *line, int i,
 							va_list a, t_params *m);
 void						between_s(char *line, int i,

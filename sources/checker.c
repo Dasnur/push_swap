@@ -28,12 +28,12 @@ int		sa_rb_com(t_head *stacks, char *line)
 	else if (ft_strcmp(line, "pb") == 0)
 	{
 		if (l_pushb(stacks))
-			return (exc());
+			return (exc(stacks));
 	}
 	else if (ft_strcmp(line, "pa") == 0)
 	{
 		if (l_pusha(stacks))
-			return (exc());
+			return (exc(stacks));
 	}
 	else if (ft_strcmp(line, "ra") == 0)
 		stacks->a = l_rotate(stacks->a);
@@ -69,7 +69,7 @@ int		rr_rrr_print(t_head *stacks, char *line, int argc, int fv)
 	return (1);
 }
 
-int		val_line(char *line)
+int		val_line(char *line, t_head *stacks)
 {
 	if (ft_strcmp(line, "sa") != 0 && ft_strcmp(line, "sb") != 0 &&
 	ft_strcmp(line, "ss") != 0 && ft_strcmp(line, "pa") != 0
@@ -77,7 +77,7 @@ int		val_line(char *line)
 	!= 0 && ft_strcmp(line, "rb") != 0 && ft_strcmp(line, "rr") != 0
 	&& ft_strcmp(line, "rra")
 	!= 0 && ft_strcmp(line, "rrb") != 0 && ft_strcmp(line, "rrr") != 0)
-		return (exc());
+		return (exc(stacks));
 	return (1);
 }
 
@@ -120,7 +120,7 @@ int		main(int argc, char **argv)
 			return (descision(stacks, stacks->line));
 		else if (!rr_rrr_print(stacks, stacks->line, argc, stacks->flag_visual))
 			break ;
-		if (!val_line(stacks->line))
+		if (!val_line(stacks->line, stacks))
 			return (descision(stacks, stacks->line));
 		free_line(&stacks->line);
 	}

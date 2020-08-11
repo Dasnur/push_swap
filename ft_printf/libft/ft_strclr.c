@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdaway <bdaway@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/19 20:13:49 by bdaway            #+#    #+#             */
-/*   Updated: 2019/09/19 20:16:05 by bdaway           ###   ########.fr       */
+/*   Created: 2019/09/13 19:21:47 by acarlett          #+#    #+#             */
+/*   Updated: 2019/09/25 21:58:42 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 void	ft_strclr(char *s)
 {
-	if (s == NULL)
+	int i;
+
+	i = 0;
+	if (!s)
 		return ;
-	while (*s)
-		*s++ = '\0';
-	s = NULL;
+	while (s[i] != '\0')
+	{
+		s[i] = '\0';
+		i++;
+	}
 }

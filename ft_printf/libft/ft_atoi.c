@@ -3,44 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdaway <bdaway@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acarlett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 23:34:15 by bdaway            #+#    #+#             */
-/*   Updated: 2019/09/26 20:15:46 by bdaway           ###   ########.fr       */
+/*   Created: 2019/09/12 21:31:14 by acarlett          #+#    #+#             */
+/*   Updated: 2019/09/18 19:46:27 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_maxmin(unsigned long long int res, long long int negative)
+static int		cherkes(const char *str)
 {
-	if (res > 9223372036854775807 && negative == 1)
-		return (-1);
-	if (res > 9223372036854775807 && negative == -1)
-		return (0);
-	return (res * negative);
+	int i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\v' || str[i] == '\t' ||
+		str[i] == '\f' || str[i] == '\r' || str[i] == '\n' ||
+		str[i] == '\f')
+		i++;
+	if (str[i] == '+' && str[i + 1] >= '0' && str[i + 1] <= '9')
+		i++;
+	return (i);
 }
 
-int			ft_atoi(const char *str)
+static int		ft_check_minus(const char *str, long i)
 {
-	unsigned long long	i;
-	size_t				nbr;
-	size_t				negative;
+	if (str[i] == '-' && (str[i + 1] >= '0' && str[i + 1] <= '9'))
+		return (-1);
+	return (1);
+}
 
-	nbr = 0;
-	negative = 1;
-	i = 0;
-	while ((str[i] == '\n') || (str[i] == '\t') || (str[i] == ' ') ||
-			(str[i] == '\v') || (str[i] == '\f') || (str[i] == '\r'))
+int				ft_atoi(const char *str)
+{
+	long i;
+	long atoi;
+	long m;
+
+	i = -1;
+	atoi = 0;
+	i = cherkes(str);
+	if ((m = ft_check_minus(str, i)) == -1)
 		i++;
-	if (str[i] == '-')
-		negative = -1;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	while (str[i] && (str[i] >= '0') && (str[i] <= '9'))
+	while ((str[i] >= '0' && str[i] <= '9') && (str[i] != '\0'))
 	{
-		nbr = nbr * 10 + str[i] - '0';
+		atoi *= 10;
+		if ((atoi + (str[i] - '0')) < atoi && m == 1)
+			return (-1);
+		if ((atoi + (str[i] - '0')) < atoi && m == -1)
+			return (0);
+		atoi = atoi + (str[i] - '0');
 		i++;
 	}
-	return (ft_maxmin(nbr, negative));
+	return ((int)(atoi *= m));
 }

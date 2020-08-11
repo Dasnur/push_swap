@@ -38,15 +38,15 @@ int		valid_arg(char **argv, int argc, t_head *stacks, int flag_visual)
 		if (check_argv(argv[argc - 1]))
 		{
 			if (check_dupl(stacks->a, ft_atoi(argv[argc - 1])))
-				return (exc());
+				return (exc(stacks));
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == -1)
-				return (exc());
+				return (exc(stacks));
 			if (ft_strlen(argv[argc - 1]) > 3 && ft_atoi(argv[argc - 1]) == 0)
-				return (exc());
+				return (exc(stacks));
 			argc--;
 		}
 		else
-			return (exc());
+			return (exc(stacks));
 	}
 	return (1);
 }

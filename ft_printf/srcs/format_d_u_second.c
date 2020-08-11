@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_d_u_second.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgenesis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 20:34:58 by pgenesis          #+#    #+#             */
-/*   Updated: 2020/02/25 20:35:04 by pgenesis         ###   ########.fr       */
+/*   Created: 2019/11/21 22:26:26 by acarlett          #+#    #+#             */
+/*   Updated: 2019/12/21 23:24:05 by acarlett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_put_choose(t_params *m)
 	int number;
 
 	if (m->ff)
-		m->long_long_in = always_pozitive(m->long_long_in);
+		m->long_long_in = ALWAYS_POZITIVE(m->long_long_in);
 	if (m->type == 4)
 		number = number_counting(m->long_long_in);
 	else
@@ -89,7 +89,7 @@ void	print_width_1(t_params *m, int size_number, int i)
 	}
 	ft_put_choose(m);
 	while (m->f_check_width != ((m->f_check_plus || m->f_otricatelnoe) +
-				biggest(size_number, m->f_check_presicion)))
+				BIGGEST(size_number, m->f_check_presicion)))
 	{
 		ft_putchar2(' ');
 		m->f_check_width--;

@@ -106,9 +106,6 @@ void	algorithm_over_5(t_head *stacks)
 
 void	algorithm(int ac, t_head *stacks)
 {
-	int		i;
-
-	i = 0;
 	if (ac == 3)
 		algorithm_2(stacks);
 	else if (ac == 4)
