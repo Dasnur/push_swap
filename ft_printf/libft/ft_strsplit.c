@@ -3,101 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdaway <bdaway@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 22:37:17 by acarlett          #+#    #+#             */
-/*   Updated: 2019/09/26 20:37:25 by acarlett         ###   ########.fr       */
+/*   Created: 2019/09/19 22:22:13 by bdaway            #+#    #+#             */
+/*   Updated: 2019/09/26 17:46:38 by bdaway           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int		split(char const *s, char c)
+static void		*ft_free(void **res)
 {
-	int i;
-	int j;
+	void		**tmp;
 
-	i = 0;
-	j = 0;
-	while (s[i])
-	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			j++;
-		i++;
-	}
-	return (j);
+	tmp = res;
+	while (res && *res)
+		free(*res++);
+	free(tmp);
+	tmp = NULL;
+	return (tmp);
 }
 
-static char		**make_strsplit(char const *s, char **a, char c)
+static int		ft_wcount(char const *s, char c)
 {
-	int i;
-	int j;
-	int k;
+	int			countw;
+	size_t		i;
 
+	countw = 0;
 	i = 0;
-	j = 0;
 	while (s[i])
 	{
-		k = 0;
-		while (j < split(s, c) && s[i] != c && s[i] != '\0')
-		{
-			a[j][k] = s[i];
+		while (s[i] == c)
 			i++;
-			k++;
-		}
-		if (k != 0)
-		{
-			a[j][k] = '\0';
-			j++;
-		}
-		i++;
-	}
-	a[j] = NULL;
-	return (a);
-}
-
-static void		*ft_free(char **a, int i)
-{
-	while (i != 0)
-		free(a[i--]);
-	return (NULL);
-}
-
-static char		**ft_strsplit_two(char const *s, char **a, char c)
-{
-	int i;
-	int j;
-	int k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (s[i])
-	{
+		if (s[i] != c && s[i] != '\0')
+			countw++;
 		while (s[i] != c && s[i] != '\0')
-		{
 			i++;
-			j++;
-		}
-		if (j != 0)
-		{
-			if (!(a[k] = (char*)malloc(sizeof(char) * (j + 1))))
-				ft_free(a, k);
-			k++;
-		}
-		j = 0;
-		i++;
 	}
-	return (make_strsplit(s, a, c));
+	return (countw);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char	**a;
+	char		**str;
+	size_t		words;
+	size_t		j;
+	size_t		k;
 
-	if (!s)
+	if (!s || !(str = (char**)malloc(sizeof(*str) *
+	((words = ft_wcount(s, c)) + 1))))
 		return (NULL);
-	if (!(a = (char**)malloc(sizeof(char*) * (split(s, c) + 1))))
-		return (NULL);
-	return (ft_strsplit_two(s, a, c));
+	k = -1;
+	while (++k < words)
+	{
+		while (*s == c)
+			s++;
+		j = 0;
+		while (s[j] != c && s[j] != '\0')
+			j++;
+		if (!(str[k] = ft_strnew(j)))
+			return (ft_free((void**)str));
+		else if (!(j = 0))
+			while (*s != c && *s)
+				str[k][j++] = *s++;
+	}
+	str[k] = 0;
+	return (str);
 }

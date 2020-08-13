@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+         #
+#    By: pgenesis <pgenesis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/11/04 17:36:24 by acarlett          #+#    #+#              #
-#    Updated: 2019/12/24 19:30:39 by acarlett         ###   ########.fr        #
+#    Created: 2020/07/14 20:42:44 by pgenesis          #+#    #+#              #
+#    Updated: 2020/08/11 23:05:40 by pgenesis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ ft_putnbr2.c \
 ft_putunsignedlong2.c \
 ft_putlonglong2.c \
 second_help.c \
+macros.c \
 
 FILES_MAIN = srcs/format_d_u.c \
 srcs/format_c.c \
@@ -91,6 +92,7 @@ srcs/ft_putnbr2.c \
 srcs/ft_putunsignedlong2.c \
 srcs/ft_putlonglong2.c \
 srcs/second_help.c \
+macros.c \
 
 SRCS = $(addprefix $(DIR_S)/,$(FILES))
 

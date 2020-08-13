@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_star.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgenesis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/07 22:39:38 by acarlett          #+#    #+#             */
-/*   Updated: 2019/12/22 20:00:21 by acarlett         ###   ########.fr       */
+/*   Created: 2020/02/25 20:29:50 by pgenesis          #+#    #+#             */
+/*   Updated: 2020/02/25 20:30:04 by pgenesis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	cont(char *line, int i, t_params *m, va_list a)
 		m->f_check_presicion = -1;
 	if (m->f_check_star && m->f_check_width < 0)
 	{
-		m->f_check_width = ALWAYS_POZITIVE(m->f_check_width);
+		m->f_check_width = always_pozitive((long long int)m->f_check_width);
 		m->f_check_minus = 1;
 	}
 	if (m->f_check_star && m->f_check_point && !m->f_check_presicion)

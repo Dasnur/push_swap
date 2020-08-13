@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: atote <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: pgenesis <pgenesis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 18:36:49 by atote             #+#    #+#              #
-#    Updated: 2019/09/16 18:37:35 by atote            ###   ########.fr        #
+#    Updated: 2020/07/26 12:12:39 by pgenesis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ INC = libft.h
 all: $(NAME)
 
 $(NAME):
-	clang -Wall -Wextra -Werror -I. $(INC) -c $(SRCS)
+	gcc -Wall -Wextra -Werror -I. $(INC) -c $(SRCS)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 

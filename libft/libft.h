@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atote <atote@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pgenesis <pgenesis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/07 20:19:09 by atote             #+#    #+#             */
-/*   Updated: 2020/03/09 15:02:05 by atote            ###   ########.fr       */
+/*   Created: 2019/09/07 20:19:09 by pgenesis          #+#    #+#             */
+/*   Updated: 2020/07/26 13:51:39 by pgenesis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *big, const char *little,
-		size_t len);
+					size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_isupper(int c);
 int					ft_isalpha(int c);
@@ -96,7 +96,7 @@ void				ft_strdel(char **as);
 void				ft_lstadd(t_list **alst, t_list *new);
 int					get_next_line(const int fd, char **line);
 int					mread_buf(char **tmp, char *buf,
-char **buffres, char **line);
+					char **buffres, char **line);
 int					mtmp_buf(char **tmp, char **line);
 int					last_string(char **tmp, char **buffres, char **line);
 char				*swap_bufs(char *s1, char *s2);

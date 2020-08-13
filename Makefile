@@ -3,22 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: atote <atote@student.42.fr>                +#+  +:+       +#+         #
+#    By: pgenesis <pgenesis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/04 17:58:09 by atote             #+#    #+#              #
-#    Updated: 2020/07/26 18:45:25 by atote            ###   ########.fr        #
+#    Created: 2020/07/14 20:44:53 by pgenesis          #+#    #+#              #
+#    Updated: 2020/08/11 23:05:48 by pgenesis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_C:= checker
 NAME_PS:= push_swap
 FILE_C:= checker push_com l_add_print push_print push_free init_fill_a
-FILE_PS:= push_swap push_al0 l_add_print push_com push_print init_fill_a algorithms_under_5 algorithms_under_5_help quick_sort_das get_target_position order_b chunks_operators place_holders
+FILE_PS:= push_swap push_algorithm l_add_print init_fill_a push_com push_print quick_sort handle_chunks alg_options handling_cases handling_placeholder get_pos stack_operations
 
 LFTDIR:=./libft
 PFDIR:=./ft_printf
 
-COMPILER:=clang
+COMPILER:=gcc
 SRCPATH:=sources/
 HDRPATH:=includes/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
@@ -35,28 +35,24 @@ all: $(NAME_PS) $(NAME_C)
 
 $(NAME_PS): $(OBJ_PS)
 	@cd $(LFTDIR) && $(MAKE)
-	@cd $(PFDIR) && $(MAKE)
-	@$(COMPILER) $(CFLAGS) $(OBJ_PS) -o $(NAME_PS) $(LFLAGS) $(PFFLAGS)
+	@$(COMPILER) $(CFLAGS) $(LFLAGS) $(PFFLAGS) $(OBJ_PS) -o $(NAME_PS)
 
 $(NAME_C): $(OBJ_C)
 	@cd $(LFTDIR) && $(MAKE)
-	@cd $(PFDIR) && $(MAKE)
-	@$(COMPILER) $(CFLAGS) $(OBJ_C) -o $(NAME_C) $(LFLAGS) $(PFFLAGS)
+	@$(COMPILER) $(CFLAGS) $(LFLAGS) $(PFFLAGS) $(OBJ_C) -o $(NAME_C)
 
 clean:
 	@rm -f $(OBJ_C)
 	@rm -f $(OBJ_PS)
 	@cd $(LFTDIR) && $(MAKE) clean
-	@cd $(PFDIR) && $(MAKE) clean
 
 fclean: clean
 	@rm -f $(NAME_C)
 	@rm -f $(NAME_PS)
 	@cd $(LFTDIR) && $(MAKE) fclean
-	@cd $(PFDIR) && $(MAKE) fclean
 	
 .c.o:
-	clang -Wall -Wextra -Werror -I includes/ -Ilibft -o $@ -c $<
+	gcc -Wall -Wextra -Werror -I includes/ -Ilibft -o $@ -c $<
 	
 re: fclean
 	@$(MAKE) all

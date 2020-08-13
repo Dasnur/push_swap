@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlett <acarlett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgenesis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 21:07:09 by acarlett          #+#    #+#             */
-/*   Updated: 2019/12/21 22:13:09 by acarlett         ###   ########.fr       */
+/*   Created: 2020/02/25 20:58:16 by pgenesis          #+#    #+#             */
+/*   Updated: 2020/02/25 21:03:58 by pgenesis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	take_all_params(char *line, int i, t_params *m)
 	m->f_check_space = ft_check_space(line, i);
 	m->f_check_width = take_width(line, i);
 	m->f_check_presicion = take_presicion(line, i);
-	m->f_check_width = ALWAYS_POZITIVE(m->f_check_width);
+	m->f_check_width = always_pozitive((long long int)m->f_check_width);
 	m->f_check_long_int = ft_check_long_int(line, i);
 	m->f_check_short_int = ft_check_short_int(line, i);
 	m->f_check_point = ft_check_point(line, i);

@@ -3,38 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bdaway <bdaway@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/12 22:59:50 by acarlett          #+#    #+#             */
-/*   Updated: 2019/09/18 19:01:19 by acarlett         ###   ########.fr       */
+/*   Created: 2019/09/18 21:48:17 by bdaway            #+#    #+#             */
+/*   Updated: 2019/09/22 22:01:43 by bdaway           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *str1, const char *str2, size_t n)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t i;
-	size_t j;
+	char	*ptr_hay;
+	char	*ptr_needle;
+	size_t	i;
+	size_t	j;
 
-	i = -1;
+	ptr_hay = (char *)haystack;
+	ptr_needle = (char *)needle;
+	i = 0;
 	j = 0;
-	if (str2[0] == '\0')
-		return ((char *)str1);
-	while (str1[++i] != '\0' && i < n)
+	if (ptr_needle[0] == 0)
+		return (&ptr_hay[i]);
+	while (ptr_hay[i] && i < len)
 	{
-		if (str1[i] == str2[0])
+		while ((ptr_hay[i + j] == ptr_needle[j])
+			&& ptr_needle[j] && (i + j) < len)
 		{
-			while ((str1[i] == str2[j]) && (str2[j] != '\0') && i < n)
-			{
-				i++;
-				j++;
-			}
-			if (str2[j] == '\0')
-				return ((char *)(&str1[i - j]));
+			j++;
+			if (ptr_needle[j] == 0)
+				return (&ptr_hay[i]);
 		}
-		i = i - j;
 		j = 0;
+		i++;
 	}
 	return (0);
 }
